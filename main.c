@@ -34,6 +34,8 @@ void getPuzzle(char *puzzle)
             i++;
         }
     }
+
+    fclose(file);
 }
 
 void printPuzzle(char *puzzle)
