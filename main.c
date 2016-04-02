@@ -1,12 +1,12 @@
 #include <stdio.h>
 
 void getPuzzle(char *puzzle);
-void printPuzzle(char *puzzle, char x, char y);
+void printPuzzle(char *puzzle, int x, int y);
 
 int main()
 {
     int c;
-    char x, y;
+    int x, y;
     x = y = 0;
 
     char puzzle[50][50];
@@ -41,7 +41,7 @@ int main()
 
 void getPuzzle(char *puzzle)
 {
-    char c;
+    int c;
     int i, j;
     FILE *file;
 
@@ -64,7 +64,7 @@ void getPuzzle(char *puzzle)
     fclose(file);
 }
 
-void printPuzzle(char *puzzle, char x, char y)
+void printPuzzle(char *puzzle, int x, int y)
 {
     int i, j;
 
