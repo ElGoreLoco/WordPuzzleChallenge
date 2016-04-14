@@ -2,7 +2,7 @@
 #include <string.h>
 
 void getPuzzle(char *puzzle);
-void printPuzzle(char *puzzle, int x, int y);
+void printPuzzle(char *puzzle, int x, int y, int selection[8][2]);
 void getWords(char *words);
 int verifySelection(int *selection, char *puzzle, char words[12][10]);
 
@@ -21,7 +21,7 @@ int main()
     char puzzle[50][50];
     char *ppuzzle = &(puzzle[0][0]);
     getPuzzle(ppuzzle);
-    printPuzzle(ppuzzle, x, y);
+    printPuzzle(ppuzzle, x, y, selection);
 
     char words[12][10];
     char *pwords = &(words[0][0]);
@@ -39,7 +39,7 @@ INSTRUCTIONS\n\
     strcpy(message, help);
 
     do {
-        printPuzzle(ppuzzle, x, y);
+        printPuzzle(ppuzzle, x, y, selection);
 
         printf("%s", message);
         strcpy(message, "");
@@ -137,18 +137,28 @@ void getPuzzle(char *puzzle)
     fclose(file);
 }
 
-void printPuzzle(char *puzzle, int x, int y)
+void printPuzzle(char *puzzle, int x, int y, int selection[8][2])
 {
-    int i, j;
+    int i, j, k;
 
     // Print puzzle
     system("clear");
     for (i = 0; i < 50; ++i) {
-        for (j = 0; j < 50; ++j)
-            if (i == y && j == x)
+        for (j = 0; j < 50; ++j) {
+            if (i == y && j == x) {
                 printf("\x1b[31m%c\x1b[0m ", puzzle[i*50+j]);
-            else
-                printf("%c ", puzzle[i*50+j]);
+            } else {
+                for (k = 0; k < 8; ++k) {
+                    if (i == selection[k][1] && j == selection[k][0]) {
+                        printf("\x1B[34m%c\x1b[0m ", puzzle[i*50+j]);
+                        k = 9;
+                    }
+                }
+                if (k < 9) {
+                    printf("%c ", puzzle[i*50+j]);
+                }
+            }
+        }
         printf("\n");
     }
 }
