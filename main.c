@@ -30,6 +30,7 @@ int main()
     char message[200];
     char help[] = "\n\
 INSTRUCTIONS\n\
+Press enter after this keys:\n\
   h: show help\n\
   wasd: movement\n\
   ' ': select letter\n\
