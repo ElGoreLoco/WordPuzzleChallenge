@@ -9,7 +9,7 @@ int verifySelection(int *selection, char *puzzle, char months[12][10]);
 int main()
 {
     int c;
-    int i;
+    int i, j;
     int x, y;
     x = y = 0;
 
@@ -26,6 +26,10 @@ int main()
     char months[12][10];
     char *pmonths = &(months[0][0]);
     getMonths(pmonths);
+
+    int monthsFound[12];
+    for (i = 0; i < 12; ++i)
+        monthsFound[i] = 0;  // No month found  |  Set to 1 for testing
 
     char message[200];
     char help[] = "\n\
@@ -55,6 +59,19 @@ Press enter after this keys:\n\
             else
                 printf("%c", puzzle[selection[i][1]][selection[i][0]]);
         printf("\n");
+
+        // Print months found
+        printf("Months found: ");
+        for (i = 0, j = 0; i < 12; ++i) {
+            if (monthsFound[i]) {
+                printf("%s ", months[i]);
+                ++j;
+            }
+        }
+        if (j < 12)
+            printf("(%d/12)\n", j);
+        else
+            printf("(%d/12 :D)\n", j);
 
         // Keyboard input
         switch (c) {
@@ -108,7 +125,9 @@ You have to select letters that are next to each other.\
                 selection_index = 0;
                 break;
             case 'v':  // Verify selection
-                verifySelection(&(selection[0][0]), ppuzzle, words);
+                i = verifySelection(&(selection[0][0]), ppuzzle, months);
+                if (i >= 0)
+                    monthsFound[i] = 1;
                 break;
             case 'h': // Show help
                 strcpy(message, help);
@@ -213,6 +232,10 @@ int verifySelection(int *selection, char *puzzle, char months[12][10])
         if ((isequal = !strcmp(str, months[i])) > 0)
             break;
 
-    printf("%d|", isequal);
-    return isequal;
+    // Return month found or -1 (no month found)
+    if (isequal) {
+        return i;
+    } else {
+        return -1;
+    }
 }
