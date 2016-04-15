@@ -3,8 +3,8 @@
 
 void getPuzzle(char *puzzle);
 void printPuzzle(char *puzzle, int x, int y, int selection[8][2]);
-void getWords(char *words);
-int verifySelection(int *selection, char *puzzle, char words[12][10]);
+void getMonths(char *months);
+int verifySelection(int *selection, char *puzzle, char months[12][10]);
 
 int main()
 {
@@ -23,9 +23,9 @@ int main()
     getPuzzle(ppuzzle);
     printPuzzle(ppuzzle, x, y, selection);
 
-    char words[12][10];
-    char *pwords = &(words[0][0]);
-    getWords(pwords);
+    char months[12][10];
+    char *pmonths = &(months[0][0]);
+    getMonths(pmonths);
 
     char message[200];
     char help[] = "\n\
@@ -164,7 +164,7 @@ void printPuzzle(char *puzzle, int x, int y, int selection[8][2])
     }
 }
 
-void getWords(char *words)
+void getMonths(char *months)
 {
     int c;
     int i, j;
@@ -174,10 +174,10 @@ void getWords(char *words)
 
     while ((c = getc(file)) != EOF) {
         if (c != '\n') {
-            words[i*10+j] = (char) c;
+            months[i*10+j] = (char) c;
             ++j;
         } else {
-            words[i*10+j] = '\0';
+            months[i*10+j] = '\0';
             ++i;
             j = 0;
         }
@@ -186,7 +186,7 @@ void getWords(char *words)
     fclose(file);
 }
 
-int verifySelection(int *selection, char *puzzle, char words[12][10])
+int verifySelection(int *selection, char *puzzle, char months[12][10])
 {
     int i, j;
     char str[9];
@@ -204,7 +204,7 @@ int verifySelection(int *selection, char *puzzle, char words[12][10])
     str[i] = '\0';
 
     for (i = 0; i < 12; ++i)
-        if ((isequal = !strcmp(str, words[i])) > 0)
+        if ((isequal = !strcmp(str, months[i])) > 0)
             break;
 
     printf("%d|", isequal);
