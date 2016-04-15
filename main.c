@@ -40,11 +40,14 @@ Press enter after this keys:\n\
     strcpy(message, help);
 
     do {
+        // Print puzzle
         printPuzzle(ppuzzle, x, y, selection);
 
+        // Print message
         printf("%s", message);
         strcpy(message, "");
 
+        // Print selection
         printf("Selection: ");
         for (i = 0; i < 8; ++i)
             if (selection[i][0] == -1)
@@ -53,6 +56,7 @@ Press enter after this keys:\n\
                 printf("%c", puzzle[selection[i][1]][selection[i][0]]);
         printf("\n");
 
+        // Keyboard input
         switch (c) {
             case 'w':
                 if (y > 0)
@@ -142,7 +146,6 @@ void printPuzzle(char *puzzle, int x, int y, int selection[8][2])
 {
     int i, j, k;
 
-    // Print puzzle
     system("clear");
     for (i = 0; i < 50; ++i) {
         for (j = 0; j < 50; ++j) {
@@ -188,7 +191,7 @@ void getMonths(char *months)
 
 int verifySelection(int *selection, char *puzzle, char months[12][10])
 {
-    int i, j;
+    int i;
     char str[9];
 
     int isequal = 0;
@@ -203,6 +206,7 @@ int verifySelection(int *selection, char *puzzle, char months[12][10])
     }
     str[i] = '\0';
 
+    // Verify selection
     for (i = 0; i < 12; ++i)
         if ((isequal = !strcmp(str, months[i])) > 0)
             break;
