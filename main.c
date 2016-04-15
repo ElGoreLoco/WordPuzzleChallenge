@@ -89,14 +89,16 @@ Press enter after this keys:\n\
                             selection[selection_index][1] = y;
                             ++selection_index;
                         } else {
-                            strcpy(message, "\x1b[31mYou have to select\
-                                    letters that are next to each other.\n\
-                                    \x1b[0m");
+                            strcpy(message, "\
+\x1b[31m\
+You have to select letters that are next to each other.\
+\n\x1b[0m");
                         }
                     } else {
-                        strcpy(message, "\x1b[31mYou have to select\
-                                letters that are next to each other.\n\
-                                \x1b[0m");
+                        strcpy(message, "\
+\x1b[31m\
+You have to select letters that are next to each other.\
+\n\x1b[0m");
                     }
                 }
                 break;
